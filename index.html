@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Dashboard</title>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        .data-box {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 8px;
+        }
+        .label {
+            font-weight: bold;
+            color: #0277bd;
+        }
+        .value {
+            font-size: 18px;
+            color: #0288d1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>🌊 Water Quality Monitoring</h2>
+        <div class="data-box">
+            <span class="label">Turbidity:</span>
+            <span id="turbidity" class="value">--</span>
+        </div>
+        <div class="data-box">
+            <span class="label">Clearness:</span>
+            <span id="clearness" class="value">--</span>
+        </div>
+        <div class="data-box">
+            <span class="label">pH Level:</span>
+            <span id="pH" class="value">--</span>
+        </div>
+        <div class="data-box">
+            <span class="label">Temperature:</span>
+            <span id="temperature" class="value">--</span>
+        </div>
+    </div>
+
+    <script>
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWjtNoRHlo2nlhPtUqNCFpUTfNwRfEGRM",
+            authDomain: "fir-iot-8fead.firebaseapp.com",
+            databaseURL: "https://fir-iot-8fead-default-rtdb.asia-southeast1.firebasedatabase.app/",
+            projectId: "fir-iot-8fead",
+            storageBucket: "fir-iot-8fead.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Function to update dashboard with Firebase data
+        function updateDashboard() {
+            database.ref("/waterQuality").on("value", (snapshot) => {
+                let data = snapshot.val();
+                document.getElementById("turbidity").innerText = data.turbidity + "%";
+                document.getElementById("clearness").innerText = data.clearness;
+                document.getElementById("pH").innerText = data.pH.toFixed(2);
+                document.getElementById("temperature").innerText = data.temperature + "°C";
+            });
+        }
+
+        // Start updating dashboard
+        updateDashboard();
+    </script>
+
+</body>
+</html>
