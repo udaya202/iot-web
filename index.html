@@ -164,11 +164,43 @@
                 transform: translateY(0);
             }
         }
+
+        /* Refresh Button */
+        .refresh-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2F80ED;
+            color: #fff;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background-color: #56CCF2;
+        }
     </style>
 </head>
 <body>
 
     <!-- Water Drop Elements -->
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
+    <div class="water-drop"></div>
     <div class="water-drop"></div>
     <div class="water-drop"></div>
     <div class="water-drop"></div>
@@ -193,6 +225,9 @@
             <span class="label">Temperature</span>
             <span class="value" id="temperature">--</span> °C
         </div>
+
+        <!-- Refresh Button -->
+        <button class="refresh-btn" onclick="window.location.reload();">Refresh</button>
     </div>
 
     <script type="module">
@@ -233,10 +268,8 @@
                 document.getElementById("pH").style.animation = "floating 1.5s ease-in-out";
                 document.getElementById("temperature").style.animation = "floating 1.5s ease-in-out";
             } else {
-                console.log("No data found in Firebase!");
+                console.log("No data available");
             }
-        }, (error) => {
-            console.error("Error reading Firebase:", error);
         });
     </script>
 
